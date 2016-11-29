@@ -73,7 +73,7 @@ function Client (gateway) {
   this.listening = false;
   this.gateway = gateway;
 
-  this.socket = dgram.createSocket('udp4');
+  this.socket = dgram.createSocket(/^v0.10./.test(process.version) ? 'udp4' : { type: 'udp4', reuseAddr: true });
   on('listening', this);
   on('message', this);
   on('close', this);
