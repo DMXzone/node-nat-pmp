@@ -263,6 +263,9 @@ Client.prototype.onmessage = function (msg, rinfo) {
   // Ignore message if we're not expecting it
   if (this._queue.length === 0) return;
 
+  // Ignore message if not from requested gateway
+  if (rinfo.address !== this.gateway) return;
+
   debug('Client#onmessage()', [msg, rinfo]);
 
   function cb (err) {
